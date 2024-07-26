@@ -51,10 +51,6 @@ library.books.forEach(book =>{
 })
 
 // Task 9: Use Object.keys and Object.values methods to log all the keys and values of the book object.
-//DIY
-
-
-
 library.books.forEach((book) =>{
     let key = Object.keys(book);
 
@@ -66,4 +62,3 @@ library.books.forEach((book) =>{
 
     console.log('----');
 })
-// console.log(library.books)
