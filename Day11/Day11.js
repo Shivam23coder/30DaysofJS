@@ -48,33 +48,13 @@ fetchData("Fetching user data...", 1000)
 
 // Activity 3: Using Async/Awalt
 // Task 4: Write an async function that waits for a promise to resolve and then logs the resolved value.
-function getData(data)
-{
-    return new Promise((resolve,reject)=>{
+function reply(delay,value){
+   return new Promise ((resolve,reject)=>{
         setTimeout(()=>{
-            resolve("success");
-            console.log("Data:",data);
-        },2000);
+            resolve(value);     // Resolving the promise
+        },delay);
     })
 }
-
-console.log("Fetching data 1..");
-getData(1).then((res)=>{
-    console.log(res);
-    console.log("Fetching data 2..");
-getData(2).then((res)=>{
-    console.log(res);
-    console.log("Fetching data 3..");
-getData(3).then((res)=>{
-    console.log(res);
-    console.log("Fetching data 4..");
-getData(4).then((res)=>{
-    console.log(res);
-});
-});
-});
-});
-
 // Task 5: Write an async function that handles a rejected promise using try-catch and logs the error message.
 async function handle(pro) {
     try{
@@ -96,13 +76,13 @@ handle(example);
 
 // Activity 4: Fetching Data from an API
 // Task 6: Use the fetch API to get data from a public API and log the response data to the console using promises.
-const apiUrl = 'https://jsonplaceholder.typicode.com/posts/1';
+const apiUrl = "https://jsonplaceholder.typicode.com/posts/1";
 
-function fetchData(){
+function fetchData2(){
     fetch(apiUrl)
         .then(response =>{
             if(!response.ok){
-                throw new Error(`Netwoek response was not ok`+ response.statusText);
+                throw new Error(`Network response was not ok`+ response.statusText);
             }
             return response.json();
         })
@@ -114,7 +94,7 @@ function fetchData(){
         });
 }
 
-fetchData();
+fetchData2();
 
 // Task 7: Use the fetch API to get data from a public API and log the response data to the console using async/awalt.
 let src =  "https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies.json";
@@ -156,8 +136,43 @@ Promise.race([p1,p2]).then((messages)=>{
 
 // Feature Request:
 
-// 1. Promise Creation Script: Write a script that demonstrates creating and handling promises, including both resolved and rejected states. 2. Promise Chaining Script: Create a script that chains multiple promises and logs messages in a specific sequence.
+// 1. Promise Creation Script: Write a script that demonstrates creating and handling promises, including both resolved and rejected states.
+function promise4(data,delay){
+    return new Promise((resolve,reject,rejected = false)=>{
+        setTimeout(()=>{
+            if(!rejected)
+            resolve(`Success p4 ${data}`);
+            else
+                reject(`Its failure: error`);
+        },delay);
+    });
+}
+
+promise4("Gogo",1000)
+    .then(response =>{
+        console.log(response);
+        return promise4("Dont go",3000);
+    })
+    .then(response=>{
+        console.log(response);
+    })
+    .catch(error=>{
+        console.error(error);
+    });
+
+promise4("Gogo2",1000,true)
+    .then(response =>{
+        console.log(response);
+    })
+    .catch(error=>{
+        console.error(`Glitch in matrix ${error}`);
+    });
+
+// 2. Promise Chaining Script: Create a script that chains multiple promises and logs messages in a specific sequence.
+
 
 // 3. Async/Await Script: Write a script that uses async/await to handle promises and includes error handling with try-catch.
 
-// 4. API Fetch Script: Create a script that fetches data from a public API using both promises and async/awalt, and logs the response data. 5. Concurrent Promises Script: Write a script that uses Promise.all and Promise. race to handle multiple promises concurrently and logs the results.
+// 4. API Fetch Script: Create a script that fetches data from a public API using both promises and async/awalt, and logs the response data.
+
+// 5. Concurrent Promises Script: Write a script that uses Promise.all and Promise. race to handle multiple promises concurrently and logs the results.
